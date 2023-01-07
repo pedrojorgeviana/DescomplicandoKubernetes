@@ -307,12 +307,12 @@
 </ul>
 </li>
 <li><a href="#que-necesito-saber-antes-de-comenzar">Que necesito saber antes de comenzar?</a><ul>
-<li><a href="#cuál-distro-gnulinux-debo-usar-">Cuál distro GNU/Linux debo usar? ?</a></li>
+<li><a href="#cuál-distro-gnulinux-debo-usar">¿Cuál distro GNU/Linux debo usar?</a></li>
 <li><a href="#algunos-sites-que-debemos-visitar">Algunos sites que debemos visitar</a></li>
-<li><a href="#y-k8s">Y k8s?</a></li>
+<li><a href="#qué-es-kubernetes">¿Qué es Kubernetes?</a></li>
 <li><a href="#arquitectura-de-k8s">Arquitectura de k8s</a></li>
 <li><a href="#puertos-de-los-que-nos-debemos-preocupar">Puertos de los que nos debemos preocupar</a></li>
-<li><a href="#chevere-pero-cuál-tipo-de-aplicación-debo-ejecutar-sobre-k8s">Chevere, pero cuál tipo de aplicación debo ejecutar sobre k8s?</a></li>
+<li><a href="#estupendo-pero-qué-tipo-de-aplicación-debo-ejecutar-sobre-k8s">Estupendo, ¿Pero qué tipo de aplicación debo ejecutar sobre k8s?</a></li>
 <li><a href="#conceptos-clave-de-k8s">Conceptos clave de k8s</a></li>
 </ul>
 </li>
@@ -396,7 +396,7 @@
 </li>
 </ul>
 <h1 id="que-necesito-saber-antes-de-comenzar">Que necesito saber antes de comenzar?</h1>
-<h2 id="cuál-distro-gnulinux-debo-usar-">Cuál distro GNU/Linux debo usar? ?</h2>
+<h2 id="¿cuál-distro-gnulinux-debo-usar">¿Cuál distro GNU/Linux debo usar?</h2>
 <p>Debido al hecho de que algunas herramientas importantes como <code>systemd</code> y <code>journald</code>, se han convertido en padrón en la mayoría de las principales distribuciones disponibles hoy, no debes tener problemas para seguir el entrenamiento, en caso de que optes por una de ellas, como Ubuntu, Debian, CentOS y afines.</p>
 <h2 id="algunos-sites-que-debemos-visitar">Algunos sites que debemos visitar</h2>
 <ul>
@@ -406,28 +406,36 @@
 </li>
 <li><p><a href="https://github.com/kubernetes/kubernetes/issues" target="_blank">https://github.com/kubernetes/kubernetes/issues</a></p>
 </li>
+</ul>
+<p>Abajo tenemos las paginas oficiales de las certificaciones de Kibernetes (CKA, CKAD e CKS)</p>
+<ul>
 <li><p><a href="https://www.cncf.io/certification/cka/" target="_blank">https://www.cncf.io/certification/cka/</a></p>
 </li>
 <li><p><a href="https://www.cncf.io/certification/ckad/" target="_blank">https://www.cncf.io/certification/ckad/</a></p>
 </li>
-<li><p><a href="https://12factor.net/pt_br/" target="_blank">https://12factor.net/pt_br/</a></p>
-</li>
 </ul>
-<h2 id="y-k8s">Y k8s?</h2>
+<p>Otro site importante para conocer y estudiar, es el site de 12 factores, muy importante para el desarrollo de aplicaciones que pretendan ejecutarse en un cluster Kubernetes:</p>
+<ul>
+<li><a href="https://12factor.net/pt_br/" target="_blank">https://12factor.net/pt_br/</a></li>
+</ul>
+<h2 id="¿qué-es-kubernetes">¿Qué es Kubernetes?</h2>
 <p><strong>Versión resumida:</strong></p>
-<p>El proyecto Kubernetes fue desarrollado por Google, a mediados de 2014, para actúar como un orquestrador de contenedores para la empresa. Kubernetes (k8s), cuyo termino en griego significa &quot;timonero&quot;, es un proyecto <em>opensource</em> que cuentac con <em>design</em> y desarrollo basados en el proyecto Borg, que tambiém es de Google <a href="https://kubernetes.io/blog/2015/04/borg-predecessor-to-kubernetes/" target="_blank">1</a>. Algunos otros productos disponibles en el mercado, tales como Apache Mesos y Cloud Foundry, tambiém surgieron a partir del proyecto Borg.</p>
+<p>El proyecto Kubernetes fue desarrollado por Google, a mediados de 2014, para actúar como un orquestrador de contenedores para la empresa. Kubernetes (k8s), cuyo termino en griego significa &quot;timonero&quot;, es un proyecto <em>opensource</em> que cuenta con <em>design</em> y desarrollo basados en el proyecto Borg, que tambiém es de Google <a href="https://kubernetes.io/blog/2015/04/borg-predecessor-to-kubernetes/" target="_blank">1</a>. Algunos otros productos disponibles en el mercado, tales como Apache Mesos y Cloud Foundry, tambiém surgieron a partir del proyecto Borg.</p>
 <p>Como Kubernetes es una palabra dificil de pronunciar - y de escribir - la comunidad simplemente lo llamó de  <strong>k8s</strong>, siguiendo el patrón <a href="http://www.i18nguy.com/origini18n.html" target="_blank">i18n</a> (la letra &quot;k&quot; seguida por ocho letras y el &quot;s&quot; al final), pronunciandose simplemente &quot;kates&quot;.</p>
 <p><strong>Versión larga:</strong></p>
-<p>Prácticamente todo el software desarrollado en Google es ejecutado en contenedor <a href="https://www.enterpriseai.news/2014/05/28/google-runs-software-containers/" target="_blank">2</a>. Google ya gestiona contenedores en larga escala hace más de una década, cuando ni siquiera se hablaba tanto sobre eso. Para atender la demanda interna, algunos desarrolladores de Google construyeron tres sistemas diferentes de gestión de contenedores: <strong>Borg</strong>, <strong>Omega</strong> y <strong>Kubernetes</strong>. Cada sistema tuvo un desarrollo bastante influenciado por su antecesor, aunque fuese desarrollado por diferentes razones.</p>
+<p>Prácticamente todo el software desarrollado en Google es ejecutado en contenedores <a href="https://www.enterpriseai.news/2014/05/28/google-runs-software-containers/" target="_blank">2</a>. Google ya gestiona contenedores en larga escala hace más de una década, cuando ni siquiera se hablaba tanto sobre eso. Para atender la demanda interna, algunos desarrolladores de Google construyeron tres sistemas diferentes de gestión de contenedores: <strong>Borg</strong>, <strong>Omega</strong> y <strong>Kubernetes</strong>. Cada sistema tuvo un desarrollo bastante influenciado por su antecesor, aunque fuese desarrollado por diferentes razones.</p>
 <p>El primer sistema de gestión de conetendores desarrollado en Google fue Borg, construido para gestionar servicios de larga duración y jobs en lotes, que anteriormente eram tratados por dos sistemas:  <strong>Babysitter</strong> y <strong>Global Work Queue</strong>. Este último influenció fuertemente la arquitectura de Borg, pero estaba enfocado en ejecución de jobs en lotes. Borg continua siendo el principal sistema de gestión de contenedores dentro de Google por causa de su escala, variedad de recursos e robustez extrema.</p>
 <p>El segundo sistema fue Omega, descendiente de Borg. Fue impulsado por el deseo de mejorar la ingeniería de software del ecosistema Borg. Ese sistema aplicó muchos de los patrones que tuvieron éxito en Borg, pero fue  construido de cero para tener la arquitectura mas consistente. Mucha de las innovaciones de Omega fueron posteriormente incorporadas a Borg.</p>
 <p>El tercer sistema fue Kubernetes. Concebido y desarrollado en un mundo donde los desarrolladores externos estaban interesándose en contenedores y Google desarrolló un negocio en amplio crecimiento actualmente, que es la venta de infraestructura de nube pública.</p>
-<p>Kubernetes es de código abierto - en contraste con Borg y Omega que fueron desarrpññadps como sistemas puramente internos de Google.
+<p>Kubernetes es de código abierto - en contraste con Borg y Omega que fueron desarrollados como sistemas puramente internos de Google.
 Kubernetes fue desarrollado con un foco mas fuerte en la experiencia de desarrolladores que escriben aplicaciones que son ejecutados en un clúster: su principal objetivo es facilitar la implantación y la gestión de sistemas distribuidos, mientras se beneficia del mejor uso de recursos de memoria y procesamiento que los contenedores posibilitan.</p>
 <p>Estas informaciones fueron extraídas y adaptadas de este <a href="https://static.googleusercontent.com/media/research.google.com/pt-BR//pubs/archive/44843.pdf" target="_blank">artículo</a>, que describe las lecciones aprendidas con el desarrollo y operaciones de esos sistemas.</p>
 <h2 id="arquitectura-de-k8s">Arquitectura de k8s</h2>
 <p>Así como los demás orquestadores disponibles, k8s tambíen sigue un modelo de <em>master/worker</em>, constituyendo así un <em>clúster</em>, donde para su funcionamiento deben existir por lo mínimo tres nodos: el nodo <em>master</em>, responsable (por patrón) por la gestión del <em>clúster</em>, y los demás como <em>workers</em>, ejecutores de las aplicaciones que queremos ejecutar sobre ese <em>clúster</em>.</p>
-<p>Pese a que existan la exigencia de por lo mínimo tres nodos para la ejecución de k8s en un ambiente patrón, existen soluciones para ejecutar k8s en un único nodo. Algunos ejemplos son:</p>
+<p>Es posible montar un clúster Kubernetes ejecutandose en un único nodo, pero se recomienda sólo para fines de estudio y nunca se debe ejecutar en un entorno de producción.</p>
+<p>Si deseas utilizar Kubernetes en tu máquina local, en tu PC/Workstation, hay varias soluciones que crearán un clúster Kubernetes, utilizando máquinas virtuales o Docker, por ejemplo.</p>
+<p>Con esto, podrás tener un clúster Kubernetes con varios nodos, pero todos ellos ejecutándose en tu máquina local, en tu PC/Workstation
+<strong>*</strong> PV seguir desde qui</p>
 <ul>
 <li><p><a href="https://kind.sigs.k8s.io/docs/user/quick-start" target="_blank">Kind</a>: Una herramienta para la ejecución de contenedores  Docker que simulan el funcionamiento de un clúster Kubernetes. Es utilizado para fines didácticos, de desarrollo y pruebas. <strong>Kind no debe ser utilizado para producción</strong>;</p>
 </li>
@@ -549,7 +557,7 @@ Kubernetes fue desarrollado con un foco mas fuerte en la experiencia de desarrol
 </tbody>
 </table>
 <p>En caso de que optes por <a href="https://weave.works" target="_blank">Weave</a> como <em>pod network</em>, deben ser abiertos también los puertos 6783 (TCP) y 6783/6784 (UDP).</p>
-<h2 id="chevere-pero-cuál-tipo-de-aplicación-debo-ejecutar-sobre-k8s">Chevere, pero cuál tipo de aplicación debo ejecutar sobre k8s?</h2>
+<h2 id="estupendo-¿pero-qué-tipo-de-aplicación-debo-ejecutar-sobre-k8s">Estupendo, ¿Pero qué tipo de aplicación debo ejecutar sobre k8s?</h2>
 <p>La mejor <em>app</em> para ejecutar en contenedor, principalmente en k8s, son las aplicaciones que siguen el <a href="https://12factor.net/pt_br/" target="_blank">The Twelve-Factor App</a>.</p>
 <h2 id="conceptos-clave-de-k8s">Conceptos clave de k8s</h2>
 <p>Es importante saber que la forma como k8s gestionar los contenedores es ligeramente diferente de otros orquestadores, como Docker Swarm, sobretodo debido al hecho de que no interactua con los contenedores directamente, mas si a través de <em>pods</em>. Vamos a conocer algunos de los principales conceptos de k8s a continuación:</p>
@@ -1676,7 +1684,7 @@ kubectl delete service nginx
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Descomplicando Kubernetes dia 1","level":"2.1","depth":1,"next":{"title":"Descomplicando Kubernetes dia 2","level":"2.2","depth":1,"path":"day_two/descomplicando_kubernetes.md","ref":"day_two/descomplicando_kubernetes.md","articles":[]},"previous":{"title":"Introdução","level":"1.1","depth":1,"path":"README.md","ref":"README.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"es","gitbook":"*"},"file":{"path":"day_one/descomplicando_kubernetes.md","mtime":"2023-01-06T23:36:44.596Z","type":"markdown"},"gitbook":{"version":"3.6.20","time":"2023-01-06T23:36:56.224Z"},"basePath":"..","book":{"language":"es"}});
+            gitbook.page.hasChanged({"page":{"title":"Descomplicando Kubernetes dia 1","level":"2.1","depth":1,"next":{"title":"Descomplicando Kubernetes dia 2","level":"2.2","depth":1,"path":"day_two/descomplicando_kubernetes.md","ref":"day_two/descomplicando_kubernetes.md","articles":[]},"previous":{"title":"Introdução","level":"1.1","depth":1,"path":"README.md","ref":"README.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"es","gitbook":"*"},"file":{"path":"day_one/descomplicando_kubernetes.md","mtime":"2023-01-07T01:05:03.818Z","type":"markdown"},"gitbook":{"version":"3.6.20","time":"2023-01-07T01:05:16.880Z"},"basePath":"..","book":{"language":"es"}});
         });
     </script>
 </div>
