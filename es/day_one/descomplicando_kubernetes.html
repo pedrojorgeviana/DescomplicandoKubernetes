@@ -314,6 +314,7 @@
 <li><a href="#puertos-de-los-que-nos-debemos-preocupar">Puertos de los que nos debemos preocupar</a></li>
 <li><a href="#estupendo-pero-qué-tipo-de-aplicación-debo-ejecutar-sobre-k8s">Estupendo, ¿Pero qué tipo de aplicación debo ejecutar sobre k8s?</a></li>
 <li><a href="#conceptos-clave-de-k8s">Conceptos clave de k8s</a></li>
+<li><a href="#importante">¡Importante!</a></li>
 </ul>
 </li>
 <li><a href="#aviso-sobre-los-comandos">Aviso sobre los comandos</a></li>
@@ -407,7 +408,7 @@
 <li><p><a href="https://github.com/kubernetes/kubernetes/issues" target="_blank">https://github.com/kubernetes/kubernetes/issues</a></p>
 </li>
 </ul>
-<p>Abajo tenemos las paginas oficiales de las certificaciones de Kibernetes (CKA, CKAD e CKS)</p>
+<p>Abajo tenemos las paginas oficiales de las certificaciones de Kubernetes (CKA, CKAD e CKS)</p>
 <ul>
 <li><p><a href="https://www.cncf.io/certification/cka/" target="_blank">https://www.cncf.io/certification/cka/</a></p>
 </li>
@@ -416,37 +417,39 @@
 </ul>
 <p>Otro site importante para conocer y estudiar, es el site de 12 factores, muy importante para el desarrollo de aplicaciones que pretendan ejecutarse en un cluster Kubernetes:</p>
 <ul>
-<li><a href="https://12factor.net/pt_br/" target="_blank">https://12factor.net/pt_br/</a></li>
+<li><a href="https://12factor.net/es/" target="_blank">https://12factor.net/es/</a></li>
 </ul>
 <h2 id="¿qué-es-kubernetes">¿Qué es Kubernetes?</h2>
 <p><strong>Versión resumida:</strong></p>
-<p>El proyecto Kubernetes fue desarrollado por Google, a mediados de 2014, para actúar como un orquestrador de contenedores para la empresa. Kubernetes (k8s), cuyo termino en griego significa &quot;timonero&quot;, es un proyecto <em>opensource</em> que cuenta con <em>design</em> y desarrollo basados en el proyecto Borg, que tambiém es de Google <a href="https://kubernetes.io/blog/2015/04/borg-predecessor-to-kubernetes/" target="_blank">1</a>. Algunos otros productos disponibles en el mercado, tales como Apache Mesos y Cloud Foundry, tambiém surgieron a partir del proyecto Borg.</p>
-<p>Como Kubernetes es una palabra dificil de pronunciar - y de escribir - la comunidad simplemente lo llamó de  <strong>k8s</strong>, siguiendo el patrón <a href="http://www.i18nguy.com/origini18n.html" target="_blank">i18n</a> (la letra &quot;k&quot; seguida por ocho letras y el &quot;s&quot; al final), pronunciandose simplemente &quot;kates&quot;.</p>
+<p>El proyecto Kubernetes fue desarrollado por Google, a mediados de 2014, para actuar como un orquestador de contenedores para la empresa. Kubernetes (k8s), cuyo termino en griego significa &quot;timonero&quot;, es un proyecto <em>opensource</em> que cuenta con <em>design</em> y desarrollo basados en el proyecto Borg, que también es de Google <a href="https://kubernetes.io/blog/2015/04/borg-predecessor-to-kubernetes/" target="_blank">1</a>. Algunos otros productos disponibles en el mercado, tales como Apache Mesos y Cloud Foundry, también surgieron a partir del proyecto Borg.</p>
+<p>Como Kubernetes es una palabra difícil de pronunciar - y de escribir - la comunidad simplemente lo llamó de  <strong>k8s</strong>, siguiendo el patrón <a href="http://www.i18nguy.com/origini18n.html" target="_blank">i18n</a> (la letra &quot;k&quot; seguida por ocho letras y el &quot;s&quot; al final), pronunciándose simplemente &quot;kates&quot;.</p>
 <p><strong>Versión larga:</strong></p>
 <p>Prácticamente todo el software desarrollado en Google es ejecutado en contenedores <a href="https://www.enterpriseai.news/2014/05/28/google-runs-software-containers/" target="_blank">2</a>. Google ya gestiona contenedores en larga escala hace más de una década, cuando ni siquiera se hablaba tanto sobre eso. Para atender la demanda interna, algunos desarrolladores de Google construyeron tres sistemas diferentes de gestión de contenedores: <strong>Borg</strong>, <strong>Omega</strong> y <strong>Kubernetes</strong>. Cada sistema tuvo un desarrollo bastante influenciado por su antecesor, aunque fuese desarrollado por diferentes razones.</p>
-<p>El primer sistema de gestión de conetendores desarrollado en Google fue Borg, construido para gestionar servicios de larga duración y jobs en lotes, que anteriormente eram tratados por dos sistemas:  <strong>Babysitter</strong> y <strong>Global Work Queue</strong>. Este último influenció fuertemente la arquitectura de Borg, pero estaba enfocado en ejecución de jobs en lotes. Borg continua siendo el principal sistema de gestión de contenedores dentro de Google por causa de su escala, variedad de recursos e robustez extrema.</p>
-<p>El segundo sistema fue Omega, descendiente de Borg. Fue impulsado por el deseo de mejorar la ingeniería de software del ecosistema Borg. Ese sistema aplicó muchos de los patrones que tuvieron éxito en Borg, pero fue  construido de cero para tener la arquitectura mas consistente. Mucha de las innovaciones de Omega fueron posteriormente incorporadas a Borg.</p>
+<p>El primer sistema de gestión de contenedores desarrollado en Google fue Borg, construido para gestionar servicios de larga duración y trabajos por lotes, que anteriormente eran tratados por dos sistemas:  <strong>Babysitter</strong> y <strong>Global Work Queue</strong>. La última influyó en gran medida en la arquitectura de Borg, pero estaba enfocada en la ejecución de trabajos por lotes. Borg continua siendo el principal sistema de gestión de contenedores dentro de Google por causa de su escala, variedad de recursos e extrema robustez.</p>
+<p>El segundo sistema fue Omega, descendiente de Borg. Fue impulsado por el deseo de mejorar la ingeniería de software del ecosistema Borg. Este sistema aplicó muchos de los patrones que tuvieron éxito en Borg, pero fue  construido de cero para tener la arquitectura mas consistente. Mucha de las innovaciones de Omega fueron posteriormente incorporadas a Borg.</p>
 <p>El tercer sistema fue Kubernetes. Concebido y desarrollado en un mundo donde los desarrolladores externos estaban interesándose en contenedores y Google desarrolló un negocio en amplio crecimiento actualmente, que es la venta de infraestructura de nube pública.</p>
 <p>Kubernetes es de código abierto - en contraste con Borg y Omega que fueron desarrollados como sistemas puramente internos de Google.
-Kubernetes fue desarrollado con un foco mas fuerte en la experiencia de desarrolladores que escriben aplicaciones que son ejecutados en un clúster: su principal objetivo es facilitar la implantación y la gestión de sistemas distribuidos, mientras se beneficia del mejor uso de recursos de memoria y procesamiento que los contenedores posibilitan.</p>
+Kubernetes fue desarrollado con un foco más fuerte en la experiencia de desarrolladores que escriben aplicaciones que son ejecutados en un clúster: su principal objetivo es facilitar la implantación y la gestión de sistemas distribuidos, mientras se beneficia del mejor uso de recursos de memoria y procesamiento que los contenedores permiten.</p>
 <p>Estas informaciones fueron extraídas y adaptadas de este <a href="https://static.googleusercontent.com/media/research.google.com/pt-BR//pubs/archive/44843.pdf" target="_blank">artículo</a>, que describe las lecciones aprendidas con el desarrollo y operaciones de esos sistemas.</p>
 <h2 id="arquitectura-de-k8s">Arquitectura de k8s</h2>
-<p>Así como los demás orquestadores disponibles, k8s tambíen sigue un modelo de <em>master/worker</em>, constituyendo así un <em>clúster</em>, donde para su funcionamiento deben existir por lo mínimo tres nodos: el nodo <em>master</em>, responsable (por patrón) por la gestión del <em>clúster</em>, y los demás como <em>workers</em>, ejecutores de las aplicaciones que queremos ejecutar sobre ese <em>clúster</em>.</p>
-<p>Es posible montar un clúster Kubernetes ejecutandose en un único nodo, pero se recomienda sólo para fines de estudio y nunca se debe ejecutar en un entorno de producción.</p>
+<p>Al igual que los demás orquestradores disponibles, k8s también sigue un modelo de <em>master/worker</em>, constituyendo así un <em>clúster</em>, donde para su funcionamiento deben existir por lo mínimo tres nodos: el nodo <em>master</em>, responsable (por patrón) por la gestión del <em>clúster</em>, y los demás como <em>workers</em>, ejecutores de las aplicaciones que queremos ejecutar sobre ese <em>clúster</em>.</p>
+<p>Es posible montar un clúster Kubernetes ejecutándose en un único nodo, pero se recomienda sólo para fines de estudio y nunca se debe ejecutar en un entorno de producción.</p>
 <p>Si deseas utilizar Kubernetes en tu máquina local, en tu PC/Workstation, hay varias soluciones que crearán un clúster Kubernetes, utilizando máquinas virtuales o Docker, por ejemplo.</p>
-<p>Con esto, podrás tener un clúster Kubernetes con varios nodos, pero todos ellos ejecutándose en tu máquina local, en tu PC/Workstation
-<strong>*</strong> PV seguir desde qui</p>
+<p>Con esto, podrás tener un clúster Kubernetes con varios nodos, pero todos ellos ejecutándose en tu máquina local, en tu PC/Workstation</p>
+<p>Algunos ejemplos son:</p>
 <ul>
-<li><p><a href="https://kind.sigs.k8s.io/docs/user/quick-start" target="_blank">Kind</a>: Una herramienta para la ejecución de contenedores  Docker que simulan el funcionamiento de un clúster Kubernetes. Es utilizado para fines didácticos, de desarrollo y pruebas. <strong>Kind no debe ser utilizado para producción</strong>;</p>
+<li><p><a href="https://kind.sigs.k8s.io/docs/user/quick-start" target="_blank">Kind</a>: Una herramienta para la ejecución de contenedores Docker que simulan el funcionamiento de un clúster Kubernetes. Es utilizado para fines didácticos, de desarrollo y pruebas. <strong>Kind no debe ser utilizado para producción</strong>;</p>
 </li>
-<li><p><a href="https://github.com/kubernetes/minikube" target="_blank">Minikube</a>: herramienta para implementar un <em>clúster</em> Kubernetes localmente con apenas un nodo. Muy utilizado para fines didáticos, de desarrollo y pruebas. <strong>Minikube no debe ser utilizado para producción</strong>;</p>
+<li><p><a href="https://github.com/kubernetes/minikube" target="_blank">Minikube</a>: herramienta para implementar un <em>clúster</em> Kubernetes localmente con apenas un nodo. Muy utilizado para fines didácticos, de desarrollo y pruebas. <strong>Minikube no debe ser utilizado para producción</strong>;</p>
 </li>
-<li><p><a href="https://microk8s.io" target="_blank">MicroK8S</a>: Desarrollado por <a href="https://canonical.com" target="_blank">Canonical</a>, misma empresa que desarrolla <a href="https://ubuntu.com" target="_blank">Ubuntu</a>. Puede ser utilizado en diversas distribuciones y <strong>puede ser utilizada para ambientes de producción</strong>, en especial para <em>Edge Computing</em> e IoT (<em>Internet of things</em>);</p>
+<li><p><a href="https://microk8s.io" target="_blank">MicroK8S</a>: Desarrollado por <a href="https://canonical.com" target="_blank">Canonical</a>, misma empresa que desarrolla <a href="https://ubuntu.com" target="_blank">Ubuntu</a>. Puede ser utilizado en diversas distribuciones y <strong>puede ser utilizada para ambientes de producción</strong>, en especial para <em>Edge Computing</em> e IoT (<em>Internet of Things</em>);</p>
 </li>
 <li><p><a href="https://k3s.io" target="_blank">k3s</a>: Desarrollado por <a href="https://rancher.com" target="_blank">Rancher Labs</a>, siendo la competencia directa de MicroK8s, pudiendo ser ejecutado inclusive en una Raspberry Pi.</p>
 </li>
+<li><p><a href="https://k0sproject.io" target="_blank">k0s</a>: Desarrollado por <a href="https://www.mirantis.com" target="_blank">Mirantis</a>, la misma empresa que adquirió la parte enterprise de <a href="https://www.docker.com" target="_blank">Docker</a>. Es una distribución de Kubernetes con todos los recursos necesarios para funcionar en un sólo binario, que proporciona simplicidad en la instalación y el mantenimiento del clúster. La pronuncia correcta es kay-zero-ess y tiene como objetivo reducir el esfuerzo técnico y el desgaste de en la instalación de un clúster Kubernetes, por lo que su nombre hace alusión a <em>Zero Friction</em>. <strong>k0s puede ser utilizado en entornos de producción</strong></p>
+</li>
 </ul>
-<p>La imagen siguiente muestra la arquitectura interna de componentes de k8s.</p>
+<p>La siguiente image muestra la arquitectura interna de componentes de k8s.</p>
 <table>
 <thead>
 <tr>
@@ -460,23 +463,26 @@ Kubernetes fue desarrollado con un foco mas fuerte en la experiencia de desarrol
 </tbody>
 </table>
 <ul>
-<li><p><strong>API Server</strong>: Es uno de los princopales componentes de k8s. Este componente provee una API que utiliza JSON sobre HTTP para comunicación, donde para esto es utilizado principalmente la utilidad <code>kubectl</code>, por parte de los administradores, para la comunicação con los demás nodos, como se muestra en el gráfico. Estas comunicaciones entre componentes son estabelecidas a través de peticiones <a href="https://restfulapi.net" target="_blank">REST</a>;</p>
+<li><p><strong>API Server</strong>: Es uno de los principales componentes de k8s. Este componente provee una API que utiliza JSON sobre HTTP para comunicación, y para ello se utiliza principalmente la herramienta <code>kubectl</code> por parte de los administradores para la comunicación con los demás nodos, como se muestra en el gráfico. Estas comunicaciones entre componentes se establecen a través de peticiones <a href="https://restfulapi.net" target="_blank">REST</a>;</p>
 </li>
-<li><p><strong>etcd</strong>: Es un <em>datastore</em> de clave-valor distribuído que k8s utiliza para almacenar las especificaciones, estatus y configuraciones del <em>clúster</em>. Todos los datos almacenados dentro de etcd son manipulados solamente  a través de la API. Por cuestiones de seguridad, por defecto etcd es ejecutado solamente en los nodos clasificados como <em>master</em> no <em>clúster</em> k8s, pero también puede ser ejecutados en <em>clústeres</em> externos, específicos para etcd, por ejemplo;</p>
+<li><p><strong>etcd</strong>: Es un <em>datastore</em> de clave-valor distribuido que k8s utiliza para almacenar las especificaciones, estado y configuraciones del <em>clúster</em>. Todos los datos almacenados dentro de etcd solo son manipulados a través de la API. Por razones de seguridad, etcd se ejecuta de forma predeterminada solo en los nodos clasificados como <em>master</em> en el <em>clúster</em> k8s, pero también puede ser ejecutados en <em>clústeres</em> externos, específicos para etcd, por ejemplo;</p>
 </li>
-<li><p><strong>Scheduler</strong>: El <em>scheduler</em> es responsable por seleccionar el nodo al que irá a hospedar un determinado <em>pod</em> (la menor unidad de un <em>clúster</em> k8s - no te preocupes sobre eso de momento, hablaremos sobre eso más tarde) para ser ejecutado. Esta selección es realizada basandose en la cantidad de recursos disponibles en cada nodo, como tambiém en el estado de cada un de los nodos del <em>clúster</em>, garantizando así que los recursos sean bien distribuídos. Además de eso, la selección de los nodos, en la cual uno o mas pods serán ejecutados, tambiém puede tomar en consideración políticas definidas por el usuário, tales como afinidad, localización de los datos a ser leídos por las aplicaciones, etc;</p>
+<li><p><strong>Scheduler</strong>: El <em>scheduler</em> es responsable por seleccionar el nodo al que irá alojará <em>pod</em> determinado (la menor unidad de un <em>clúster</em> k8s - no te preocupes sobre eso de momento, hablaremos sobre eso más tarde) para ser ejecutado. Esta selección se basa en la cantidad de recursos disponibles en cada nodo, así como en el estado de cada un de los nodos del <em>clúster</em>, asegurando una buena distribución de recursos. Además, la selección de nodos en la que se ejecutarán uno o varios pods también puede tener en cuenta políticas definidas por el usuario, tales como afinidad, localización de los datos a ser leídos por las aplicaciones, etc;</p>
 </li>
-<li><p><strong>Controller Manager</strong>: Es el <em>controller manager</em> quien garantice que el <em>clúster</em> esté en el último estado definido en el etcd. Por ejemplo: se en el etcd un <em>deploy</em> está configurado para tener diez réplicas de un <em>pod</em>, es el <em>controller manager</em> quien irá a verificar si el estado actual del <em>clúster</em> corresponde a este estado y, en caso contrario, procurará conciliar ambos (estado deseado);</p>
+<li><p><strong>Controller Manager</strong>: Es el <em>controller manager</em> quien garantiza que el <em>clúster</em> esté en el último estado definido en el etcd. Por ejemplo: se en el etcd un <em>deploy</em> está configurado para tener diez réplicas de un <em>pod</em>, es el <em>controller manager</em> quien irá a verificar si el estado actual del <em>clúster</em> corresponde a este estado y, en caso contrario, procurará conciliar ambos (estado deseado);</p>
 </li>
-<li><p><strong>Kubelet</strong>: El <em>kubelet</em> puode ser visto como el agente de k8s que es ejecutado en los nodos workers. En cada nodo worker deberá existir un agente Kubelet en ejecución. Kubelet es responsável por de facto gestionar  <em>pods</em>, que fueran direccionados por el <em>controller</em> del <em>clúster</em>, dentro de los nodos, de forma que para esto Kubelet puede iniciar, detener y mantener los contenedores e los pods en funcionamiento de acuerdo con lo instruído por el controlador del clúster;</p>
+<li><p><strong>Kubelet</strong>: El <em>kubelet</em> puede verse como el agente de k8s que se ejecuta en los nodos workers. En cada nodo worker deberá existir un agente Kubelet en ejecución. Kubelet es responsable de administrar los <em>pods</em>, que han sido direccionados por el <em>controller</em> del <em>clúster</em>, dentro de los nodos, de forma que para esto Kubelet puede iniciar, detener y mantener los contenedores e los pods en funcionamiento según lo instruido por el controlador del clúster;</p>
 </li>
-<li><p><strong>Kube-proxy</strong>: Actúa como un <em>proxy</em> y un <em>load balancer</em>. Este componente es responsable por efectuar la rotación de solicitudes para los <em>pods</em> correctos, como tambiém por cuidar de la parte de la red del nodo;</p>
+<li><p><strong>Kube-proxy</strong>: Actúa como un <em>proxy</em> y un <em>load balancer</em>. Este componente es responsable de encaminar las solicitudes a los <em>pods</em> correctos, como también por cuidar de la parte de la red del nodo;</p>
 </li>
-<li><p><strong>Container Runtime</strong>: El <em>container runtime</em> es el ambiente de ejecución de contenedores necesario para el funcionamento de k8s. En 2016 el soporte a <a href="https://coreos.com/rkt/" target="_blank">rkt</a> fue adicionado, sin embargo, desde el comienzo Docker ya es funcional y utilizado por defecto.</p>
+<li><p><strong>Container Runtime</strong>: El <em>container runtime</em> es el entorno de ejecución de contenedores necesario para el funcionamiento de k8s. A partir de la versión v1.24 el k8s requiere que se utilice un container runtime compatible con el CRI (Container Runtime Interface) que se presentó en el 2016 como una interfaz capaz de establecer un estándar de comunicación  entre el container runtime y k8s. Versiones anteriores a la v1.24 ofrecían una integración directa con el Docker Engine utilizando un componente llamado dockershim, pero esta integración directa ya no está disponible. La documentación oficial de Kubernetes (v1.24) presenta algunos entornos de ejecución y sus respectivas configuraciones, como <a href="https://kubernetes.io/docs/setup/production-environment/container-runtimes/#containerd" target="_blank">containerd</a> un proyecto evaluado con el nivel graduado por la CNCF (Cloud Native Computing Foundation) y el <a href="https://kubernetes.io/docs/setup/production-environment/container-runtimes/#cri-o" target="_blank">CRI-0</a> un proyecto incubado por la CNCF.</p>
 </li>
 </ul>
+<blockquote>
+<p>Los proyectos graduados y incubados por CNCF son considerados estables y utilizados con éxito en producción.</p>
 <h2 id="puertos-de-los-que-nos-debemos-preocupar">Puertos de los que nos debemos preocupar</h2>
-<p><strong>MASTER</strong></p>
+</blockquote>
+<p><strong>CONTROL PLANE</strong></p>
 <table>
 <thead>
 <tr>
@@ -526,7 +532,7 @@ Kubernetes fue desarrollado con un foco mas fuerte en la experiencia de desarrol
 </tbody>
 </table>
 <ul>
-<li>Todo puerto marcado por * es personalizable, necesitas cerciorarte que el puerto modificado también esté abierto.</li>
+<li>Todo puerto marcado por * es personalizable, debe asegurarse que el puerto modificado también esté abierto.</li>
 </ul>
 <p><strong>WORKERS</strong></p>
 <table>
@@ -556,32 +562,35 @@ Kubernetes fue desarrollado con un foco mas fuerte en la experiencia de desarrol
 </tr>
 </tbody>
 </table>
-<p>En caso de que optes por <a href="https://weave.works" target="_blank">Weave</a> como <em>pod network</em>, deben ser abiertos también los puertos 6783 (TCP) y 6783/6784 (UDP).</p>
+<p>Si eliges <a href="https://weave.works" target="_blank">Weave</a> como <em>pod network</em>, también deben ser abiertos los puertos 6783 (TCP) y 6783/6784 (UDP).</p>
 <h2 id="estupendo-¿pero-qué-tipo-de-aplicación-debo-ejecutar-sobre-k8s">Estupendo, ¿Pero qué tipo de aplicación debo ejecutar sobre k8s?</h2>
-<p>La mejor <em>app</em> para ejecutar en contenedor, principalmente en k8s, son las aplicaciones que siguen el <a href="https://12factor.net/pt_br/" target="_blank">The Twelve-Factor App</a>.</p>
+<p>La mejor <em>app</em> para ejecutar en contenedor, principalmente en k8s, son las aplicaciones que siguen el <a href="https://12factor.net/es/" target="_blank">The Twelve-Factor App</a>.</p>
 <h2 id="conceptos-clave-de-k8s">Conceptos clave de k8s</h2>
-<p>Es importante saber que la forma como k8s gestionar los contenedores es ligeramente diferente de otros orquestadores, como Docker Swarm, sobretodo debido al hecho de que no interactua con los contenedores directamente, mas si a través de <em>pods</em>. Vamos a conocer algunos de los principales conceptos de k8s a continuación:</p>
+<p>Es importante saber que la forma como k8s gestiona los contenedores es ligeramente diferente de otros orquestadores, como Docker Swarm, debido principalmente a que no gestiona los contenedores directamente, sino a través de <em>pods</em>. Conozcamos a continuación algunos de los principales conceptos que rodean k8s:</p>
 <ul>
 <li><p><strong>Pod</strong>: es el menor objeto en k8s. Como se ha dicho anteriormente, k8s no trabaja con los contenedores  directamente, pero los organiza dentro de <em>pods</em>, que son abstracciones que dividen los mismos recursos, como direcciones, volúmenes, ciclos de CPU y memoria. Un pod, a pesar de que no sea común, puede poseer varios contenedores;</p>
 </li>
-<li><p><strong>Controller</strong>: es el objeto responsable de interactuar con el <em>API Server</em> y orquestar algún otro objeto. Ejemplos de objetos de esta clase son los <em>Deployments</em> y <em>Replication Controllers</em>;</p>
+<li><p><strong>Deployment</strong>: Es uno de los principales <em>controllers</em> utilizados. El <em>Deployment</em>, junto con el <em>ReplicaSet</em>, asegura que un cierto numero de réplicas de um pod se están ejecutando nodos workers del cluster. Además, el Deployment también se encarga de gestionar el ciclo de vida de las aplicaciones, donde las características relacionadas con la aplicación, como imagen, puertos, volúmenes y variables de entorno, pueden ser especificadas en ficheros del tipo <em>yaml</em> o <em>json</em> para ser posteriormente pasados como parámetro para a <code>kubectl</code> para realizar el despliegue. Esta acción puede realizarse tanto para crear como para actualizar y eliminar el despliegue;</p>
 </li>
 <li><p><strong>ReplicaSets</strong>: es un objeto responsable de garantizar la cantidad de pods en ejecución en el nodo;</p>
 </li>
-<li><p><strong>Deployment</strong>: Es un de los principales <em>controllers</em> utilizados. El <em>Deployment</em>, en conjunto con el <em>ReplicaSet</em>, garantiza que determinado número de réplicas de un pod estén en ejecución en los nodos workers del clúster. Además de eso, el Deployment tambiém es responsable por gestionar el ciclo de vida de las aplicaciones, donde las características asociadas a la aplicación, tales como: imagen, puerto, volúmenes y variables de ambiente, pueden ser especificados en archivos de tipo <em>yaml</em> o <em>json</em> para posteriormente ser pasados como parámetro para <code>kubectl</code> y ejecutar el deployment. Esta acción puede ser ejecutada tanto para la creación como para la actualización o eliminación del deployment;</p>
+<li><p><strong>Services</strong>: Es una forma de exponer la comunicación a través de un <em>ClusterIP</em>, <em>NodePort</em> o <em>LoadBalancer</em> para distribuir las peticiones entre diversos Pods de ese despliegue. Funciona como un balanceador de carga.</p>
+</li>
+<li><p><strong>Controller</strong>: es el objeto responsable de interactuar con el <em>API Server</em> y orquestar algún otro objeto. Ejemplos de objetos de esta clase son los <em>Deployments</em>;</p>
 </li>
 <li><p><strong>Jobs y CronJobs</strong>: son objetos responsables por la gestión de jobs aislados o recurrentes.</p>
 </li>
 </ul>
+<h2 id="¡importante">¡Importante!</h2>
 <h1 id="aviso-sobre-los-comandos">Aviso sobre los comandos</h1>
 <blockquote>
-<p>Atención!!! Cada comando es presentado como tipo prompt. Ejemplos:</p>
+<p>¡¡¡Atención!!! Cada comando es presentado como tipo prompt. Ejemplos:</p>
 </blockquote>
 <pre><code>$ comando1
 </code></pre><pre><code># comando2
 </code></pre><blockquote>
-<p>El prompt que inicia con el caracter &quot;$&quot;, indica que el comando debe ser ejecutado con un usuario común del sistema operarativo.</p>
-<p>El prompt que inicia con el caracter &quot;#&quot;, indica que el comando debe ser ejecutado como usuario <strong>root</strong>.</p>
+<p>El prompt que inicia con el carácter &quot;$&quot;, indica que el comando debe ser ejecutado con un usuario común del sistema operativo.</p>
+<p>El prompt que inicia con el carácter &quot;#&quot;, indica que el comando debe ser ejecutado como usuario <strong>root</strong>.</p>
 <p>No debes copiar/pegar el prompt, solamente el comando. :-)</p>
 </blockquote>
 <h1 id="minikube">Minikube</h1>
@@ -1684,7 +1693,7 @@ kubectl delete service nginx
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Descomplicando Kubernetes dia 1","level":"2.1","depth":1,"next":{"title":"Descomplicando Kubernetes dia 2","level":"2.2","depth":1,"path":"day_two/descomplicando_kubernetes.md","ref":"day_two/descomplicando_kubernetes.md","articles":[]},"previous":{"title":"Introdução","level":"1.1","depth":1,"path":"README.md","ref":"README.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"es","gitbook":"*"},"file":{"path":"day_one/descomplicando_kubernetes.md","mtime":"2023-01-07T01:09:42.319Z","type":"markdown"},"gitbook":{"version":"3.6.20","time":"2023-01-07T01:09:54.726Z"},"basePath":"..","book":{"language":"es"}});
+            gitbook.page.hasChanged({"page":{"title":"Descomplicando Kubernetes dia 1","level":"2.1","depth":1,"next":{"title":"Descomplicando Kubernetes dia 2","level":"2.2","depth":1,"path":"day_two/descomplicando_kubernetes.md","ref":"day_two/descomplicando_kubernetes.md","articles":[]},"previous":{"title":"Introdução","level":"1.1","depth":1,"path":"README.md","ref":"README.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"es","gitbook":"*"},"file":{"path":"day_one/descomplicando_kubernetes.md","mtime":"2023-01-08T22:08:07.174Z","type":"markdown"},"gitbook":{"version":"3.6.20","time":"2023-01-08T22:08:20.734Z"},"basePath":"..","book":{"language":"es"}});
         });
     </script>
 </div>
