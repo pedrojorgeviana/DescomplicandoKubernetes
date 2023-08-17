@@ -317,8 +317,6 @@
 </li>
 <li><a href="#el-daemonset">El DaemonSet</a><ul>
 <li><a href="#creando-un-daemonset">Creando un DaemonSet</a></li>
-<li><a href="#apagando-el-replicaset">Apagando el ReplicaSet</a></li>
-<li><a href="#creando-un-daemonset-1">Creando un DaemonSet</a></li>
 <li><a href="#creación-de-un-daemonset-utilizando-el-comando-kubectl-create">Creación de un DaemonSet utilizando el comando kubectl create</a></li>
 <li><a href="#añadiendo-un-nodo-al-clúster">Añadiendo un nodo al clúster</a></li>
 <li><a href="#eliminando-un-daemonset">Eliminando un DaemonSet</a></li>
@@ -678,90 +676,6 @@ nginx-replicaset              3         3         3       6s
 </ul>
 <p>Por lo tanto, si nuestro clúster tiene 3 nodos, el <code>DaemonSet</code> garantizará que todos los nodos ejecuten una réplica del <code>Pod</code> que está gestionando, es decir, 3 réplicas del <code>Pod</code>.</p>
 <p>Si agregamos otro nodo al clúster, el <code>DaemonSet</code> garantizará que todos los nodos ejecuten una réplica del <code>Pod</code> que está gestionando, es decir, 4 réplicas del <code>Pod</code>.</p>
-<h4 id="creando-un-daemonset">Creando un DaemonSet</h4>
-<p>Vamos a nuestro primer ejemplo, crearemos un <code>DaemonSet</code> que asegurará que todos los nodos del clúster ejecuten una réplica del <code>Pod</code> <code>node-exporter</code>, que es un recolector de métricas para <code>Prometheus</code>.</p>
-<p>Para esto, crearemos un archivo llamado <code>node-exporter-daemonset.yaml</code> y agregaremos el siguiente contenido.</p>
-<pre><code class="lang-yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">apps/v1</span> <span class="hljs-comment"># Versión de la API de Kubernetes del objeto</span>
-<span class="hljs-attr">kind:</span> <span class="hljs-string">DaemonSet</span> <span class="hljs-comment"># Tipo de objeto</span>
-<span class="hljs-attr">metadata:</span> <span class="hljs-comment"># Metadatos sobre el objeto</span>
-  <span class="hljs-attr">name:</span> <span class="hljs-string">node-exporter</span> <span class="hljs-comment"># Nombre del objeto</span>
-<span class="hljs-attr">spec:</span> <span class="hljs-comment"># Especificación del objeto</span>
-  <span class="hljs-attr">selector:</span> <span class="hljs-comment"># Selector del objeto</span>
-    <span class="hljs-attr">matchLabels:</span> <span class="hljs-comment"># Etiquetas que se utilizarán para seleccionar los Pods</span>
-      <span class="hljs-attr">app:</span> <span class="hljs-string">node-exporter</span> <span class="hljs-comment"># Etiqueta que se utilizará para seleccionar los Pods</span>
-  <span class="hljs-attr">template:</span> <span class="hljs-comment"># Plantilla del objeto</span>
-    <span class="hljs-attr">metadata:</span> <span class="hljs-comment"># Metadatos sobre el objeto</span>
-      <span class="hljs-attr">labels:</span> <span class="hljs-comment"># Etiquetas que se agregarán a los Pods</span>
-        <span class="hljs-attr">app:</span> <span class="hljs-string">node-exporter</span> <span class="hljs-comment"># Etiqueta que se agregará a los Pods</span>
-    <span class="hljs-attr">spec:</span> <span class="hljs-comment"># Especificación del objeto, en este caso, la especificación del Pod</span>
-      <span class="hljs-attr">hostNetwork:</span> <span class="hljs-literal">true</span> <span class="hljs-comment"># Habilita el uso de la red del host, usar con precaución</span>
-      <span class="hljs-attr">containers:</span> <span class="hljs-comment"># Lista de contenedores que se ejecutarán en el Pod</span>
-      <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">node-exporter</span> <span class="hljs-comment"># Nombre del contenedor</span>
-        <span class="hljs-attr">image:</span> <span class="hljs-string">prom/node-exporter:latest</span> <span class="hljs-comment"># Imagen del contenedor</span>
-        <span class="hljs-attr">ports:</span> <span class="hljs-comment"># Lista de puertos que se expondrán en el contenedor</span>
-        <span class="hljs-bullet">-</span> <span class="hljs-attr">containerPort:</span> <span class="hljs-number">9100</span> <span class="hljs-comment"># Puerto que se expondrá en el contenedor</span>
-          <span class="hljs-attr">hostPort:</span> <span class="hljs-number">9100</span> <span class="hljs-comment"># Puerto que se expondrá en el host</span>
-        <span class="hljs-attr">volumeMounts:</span> <span class="hljs-comment"># Lista de montajes de volúmenes en el contenedor, ya que el node-exporter necesita acceso a /proc y /sys</span>
-        <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">proc</span> <span class="hljs-comment"># Nombre del volumen</span>
-          <span class="hljs-attr">mountPath:</span> <span class="hljs-string">/host/proc</span> <span class="hljs-comment"># Ruta donde se montará el volumen en el contenedor</span>
-          <span class="hljs-attr">readOnly:</span> <span class="hljs-literal">true</span> <span class="hljs-comment"># Habilita el modo de solo lectura</span>
-        <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">sys</span> <span class="hljs-comment"># Nombre del volumen </span>
-          <span class="hljs-attr">mountPath:</span> <span class="hljs-string">/host/sys</span> <span class="hljs-comment"># Ruta donde se montará el volumen en el contenedor</span>
-          <span class="hljs-attr">readOnly:</span> <span class="hljs-literal">true</span> <span class="hljs-comment"># Habilita el modo de solo lectura</span>
-      <span class="hljs-attr">volumes:</span> <span class="hljs-comment"># Lista de volúmenes que se utilizarán en el Pod</span>
-      <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">proc</span> <span class="hljs-comment"># Nombre del volumen</span>
-        <span class="hljs-attr">hostPath:</span> <span class="hljs-comment"># Tipo de volumen </span>
-          <span class="hljs-attr">path:</span> <span class="hljs-string">/proc</span> <span class="hljs-comment"># Ruta del volumen en el host</span>
-      <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">sys</span> <span class="hljs-comment"># Nombre del volumen</span>
-        <span class="hljs-attr">hostPath:</span> <span class="hljs-comment"># Tipo de volumen</span>
-          <span class="hljs-attr">path:</span> <span class="hljs-string">/sys</span> <span class="hljs-comment"># Ruta del volumen en el host</span>
-</code></pre>
-<p> </p>
-<h4 id="apagando-el-replicaset">Apagando el ReplicaSet</h4>
-<p>Para eliminar el <code>ReplicaSet</code> y todos los <code>Pods</code> que este está gestionando, simplemente ejecuta el siguiente comando.</p>
-<pre><code class="lang-bash">kubectl delete replicaset nginx-replicaset
-</code></pre>
-<p> </p>
-<p>Si deseas hacerlo utilizando el archivo de manifiesto, ejecuta el siguiente comando.</p>
-<pre><code class="lang-bash">kubectl delete -f nginx-replicaset.yaml
-</code></pre>
-<p> </p>
-<p>Listo, nuestro <code>ReplicaSet</code> ha sido eliminado y todos los <code>Pods</code> que estaba gestionando también han sido eliminados.</p>
-<p>Durante nuestra sesión, ya hemos aprendido cómo crear un <code>ReplicaSet</code> y cómo funciona, pero aún tenemos mucho por aprender, así que continuemos.</p>
-<p> </p>
-<p>Ya sabemos qué es un <code>Pod</code>, un <code>Deployment</code> y un <code>ReplicaSet</code>, pero ahora es el momento de conocer otro objeto de <code>Kubernetes</code>, el <code>DaemonSet</code>.</p>
-<p>El <code>DaemonSet</code> es un objeto que garantiza que todos los nodos del clúster ejecuten una réplica de un <code>Pod</code>, es decir, asegura que todos los nodos del clúster ejecuten una copia de un <code>Pod</code>.</p>
-<p>El <code>DaemonSet</code> es muy útil para ejecutar <code>Pods</code> que deben ejecutarse en todos los nodos del clúster, como por ejemplo, un <code>Pod</code> que realiza el monitoreo de registros o un <code>Pod</code> que realiza el monitoreo de métricas.</p>
-<p>Algunos casos de uso de <code>DaemonSets</code> son:</p>
-<ul>
-<li>Ejecución de agentes de monitoreo, como <code>Prometheus Node Exporter</code> o <code>Fluentd</code>.</li>
-<li>Ejecución de un proxy de red en todos los nodos del clúster, como <code>kube-proxy</code>, <code>Weave Net</code>, <code>Calico</code> o <code>Flannel</code>.</li>
-<li>Ejecución de agentes de seguridad en cada nodo del clúster, como <code>Falco</code> o <code>Sysdig</code>.</li>
-</ul>
-<p>Por lo tanto, si nuestro clúster tiene 3 nodos, el <code>DaemonSet</code> garantizará que todos los nodos ejecuten una réplica del <code>Pod</code> que está gestionando, es decir, 3 réplicas del <code>Pod</code>.</p>
-<p>Si agregamos otro nodo al clúster, el <code>DaemonSet</code> garantizará que todos los nodos ejecuten una réplica del <code>Pod</code> que está gestionando, es decir, 4 réplicas del <code>Pod</code>.</p>
-<p>Para remover o <code>ReplicaSet</code> e todos os <code>Pods</code> que ele está gerenciando, basta executar o comando abaixo.</p>
-<pre><code class="lang-bash">kubectl delete replicaset nginx-replicaset
-</code></pre>
-<p> </p>
-<p>Caso você queira fazer isso utilizando o arquivo de manifesto, basta executar o comando abaixo.</p>
-<pre><code class="lang-bash">kubectl delete -f nginx-replicaset.yaml
-</code></pre>
-<p> </p>
-<p>Pronto, o nosso <code>ReplicaSet</code> foi removido e todos os <code>Pods</code> que ele estava gerenciando também foram removidos.</p>
-<p>Durante a nossa sessão, nós já aprendemos como criar um <code>ReplicaSet</code> e como ele funciona, mas ainda temos muito o que aprender, então vamos continuar.</p>
-<p> </p>
-<p>Já sabemos o que é um <code>Pod</code>, um <code>Deployment</code> e um <code>ReplicaSet</code>, mas agora é a hora de conhecermos mais um objeto do <code>Kubernetes</code>, o <code>DaemonSet</code>.</p>
-<p>O <code>DaemonSet</code> é um objeto que garante que todos os nós do cluster executem uma réplica de um <code>Pod</code>, ou seja, ele garante que todos os nós do cluster executem uma cópia de um <code>Pod</code>.</p>
-<p>O <code>DaemonSet</code> é muito útil para executar <code>Pods</code> que precisam ser executados em todos os nós do cluster, como por exemplo, um <code>Pod</code> que faz o monitoramento de logs, ou um <code>Pod</code> que faz o monitoramento de métricas.</p>
-<p>Alguns casos de uso de <code>DaemonSets</code> são:</p>
-<ul>
-<li>Execução de agentes de monitoramento, como o <code>Prometheus Node Exporter</code> ou o <code>Fluentd</code>.</li>
-<li>Execução de um proxy de rede em todos os nós do cluster, como  <code>kube-proxy</code>, <code>Weave Net</code>, <code>Calico</code> ou <code>Flannel</code>.</li>
-<li>Execução de agentes de segurança em cada nó do cluster, como  <code>Falco</code> ou <code>Sysdig</code>.</li>
-</ul>
-<p>Portanto, se nosso cluster possuir 3 nós, o <code>DaemonSet</code> vai garantir que todos os nós executem uma réplica do <code>Pod</code> que ele está gerenciando, ou seja, 3 réplicas do <code>Pod</code>.</p>
-<p>Caso adicionemos mais um <code>node</code> ao cluster, o <code>DaemonSet</code> vai garantir que todos os nós executem uma réplica do <code>Pod</code> que ele está gerenciando, ou seja, 4 réplicas do <code>Pod</code>.</p>
 <h4 id="creando-un-daemonset">Creando un DaemonSet</h4>
 <p>Vamos con nuestro primer ejemplo, vamos a crear un <code>DaemonSet</code> que asegurará que todos los nodos del clúster ejecuten una réplica del <code>Pod</code> del <code>node-exporter</code>, que es un exportador de métricas para <code>Prometheus</code>.</p>
 <p>Para lograrlo, vamos a crear un archivo llamado <code>node-exporter-daemonset.yaml</code> y agregar el siguiente contenido.</p>
@@ -1664,7 +1578,7 @@ nginx-deployment-6fbd5f9794-kvrp8   1/1     Running   0          2m12s
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Simplificando Kubernetes día 4","level":"2.4","depth":1,"next":{"title":"Simplificando Kubernetes día 5","level":"2.5","depth":1,"path":"day_five/README.md","ref":"day_five/README.md","articles":[]},"previous":{"title":"Simplificando Kubernetes día 3","level":"2.3","depth":1,"path":"day_three/README.md","ref":"day_three/README.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"es","gitbook":"*"},"file":{"path":"day_four/README.md","mtime":"2023-08-12T20:08:59.621Z","type":"markdown"},"gitbook":{"version":"3.6.20","time":"2023-08-12T20:09:12.548Z"},"basePath":"..","book":{"language":"es"}});
+            gitbook.page.hasChanged({"page":{"title":"Simplificando Kubernetes día 4","level":"2.4","depth":1,"next":{"title":"Simplificando Kubernetes día 5","level":"2.5","depth":1,"path":"day_five/README.md","ref":"day_five/README.md","articles":[]},"previous":{"title":"Simplificando Kubernetes día 3","level":"2.3","depth":1,"path":"day_three/README.md","ref":"day_three/README.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"es","gitbook":"*"},"file":{"path":"day_four/README.md","mtime":"2023-08-17T18:47:23.984Z","type":"markdown"},"gitbook":{"version":"3.6.20","time":"2023-08-17T18:47:42.419Z"},"basePath":"..","book":{"language":"es"}});
         });
     </script>
 </div>
