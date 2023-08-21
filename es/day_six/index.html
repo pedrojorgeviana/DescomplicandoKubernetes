@@ -302,11 +302,11 @@
                                 <h1 id="simplificando-kubernetes">Simplificando Kubernetes</h1>
 <h2 id="día-6">Día 6</h2>
 <p> </p>
-<h2 id="contenído-del-día-6">Contenído del Día 6</h2>
+<h2 id="contenido-del-día-6">Contenido del Día 6</h2>
 <ul>
 <li><a href="#simplificando-kubernetes">Simplificando Kubernetes</a><ul>
 <li><a href="#día-6">Día 6</a></li>
-<li><a href="#contenído-del-día-6">Contenído del Día 6</a></li>
+<li><a href="#contenido-del-día-6">Contenido del Día 6</a></li>
 <li><a href="#inicio-de-la-lección-del-día-6">Inicio de la Lección del Día 6</a><ul>
 <li><a href="#qué-veremos-hoy">¿Qué veremos hoy?</a><ul>
 <li><a href="#qué-son-los-volúmenes">¿Qué son los volúmenes?</a><ul>
@@ -714,7 +714,7 @@ Events:            &lt;none&gt;
 <pre><code class="lang-bash">kubectl apply -f pv-nfs.yaml
 </code></pre>
 <p> </p>
-<pre><code class="lang-bash">persistentvolume/meu-pv created
+<pre><code class="lang-bash">persistentvolume/mi-pv created
 </code></pre>
 <p> </p>
 <p>Todo está bien con nuestro PV, ahora creo que podemos pasar al próximo tema, que es el PVC.</p>
@@ -753,7 +753,7 @@ persistentvolumeclaim/mi-pvc created
 <pre><code class="lang-bash">kubectl get pvc
 </code></pre>
 <pre><code class="lang-bash">NAME      STATUS    VOLUME   CAPACITY   ACCESS MODES   STORAGECLASS   AGE
-meu-pvc   Pending                                      nfs            5s
+mi-pvc   Pending                                      nfs            5s
 </code></pre>
 <p>Ahí está, pero el estado es <code>Pendiente</code>. Veamos si hay alguna información que nos ayude a entender qué está sucediendo.</p>
 <pre><code class="lang-bash">kubectl describe pvc mi-pvc
@@ -874,7 +874,7 @@ Conditions:
   ContainersReady   True 
   PodScheduled      True 
 Volumes:
-  meu-pvc:
+  mi-pvc:
     Type:       PersistentVolumeClaim (a reference to a PersistentVolumeClaim <span class="hljs-keyword">in</span> the same namespace)
     ClaimName:  mi-pvc
     ReadOnly:   <span class="hljs-literal">false</span>
@@ -960,7 +960,7 @@ Events:
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Simplificando Kubernetes día 6","level":"2.6","depth":1,"next":{"title":"Cloud providers","level":"3.1","depth":1,"path":"extras/cloud-providers/cloud-providers.md","ref":"extras/cloud-providers/cloud-providers.md","articles":[]},"previous":{"title":"Simplificando Kubernetes día 5","level":"2.5","depth":1,"path":"day_five/README.md","ref":"day_five/README.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"es","gitbook":"*"},"file":{"path":"day_six/README.md","mtime":"2023-08-19T06:32:50.946Z","type":"markdown"},"gitbook":{"version":"3.6.20","time":"2023-08-19T06:33:06.165Z"},"basePath":"..","book":{"language":"es"}});
+            gitbook.page.hasChanged({"page":{"title":"Simplificando Kubernetes día 6","level":"2.6","depth":1,"next":{"title":"Cloud providers","level":"3.1","depth":1,"path":"extras/cloud-providers/cloud-providers.md","ref":"extras/cloud-providers/cloud-providers.md","articles":[]},"previous":{"title":"Simplificando Kubernetes día 5","level":"2.5","depth":1,"path":"day_five/README.md","ref":"day_five/README.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"es","gitbook":"*"},"file":{"path":"day_six/README.md","mtime":"2023-08-21T10:38:57.658Z","type":"markdown"},"gitbook":{"version":"3.6.20","time":"2023-08-21T10:39:21.263Z"},"basePath":"..","book":{"language":"es"}});
         });
     </script>
 </div>
