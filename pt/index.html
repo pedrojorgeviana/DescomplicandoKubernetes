@@ -277,9 +277,9 @@
             
         </li>
     
-        <li class="chapter " data-level="2.14" data-path="day-14/README.md">
+        <li class="chapter " data-level="2.14" data-path="day-14/">
             
-                <span>
+                <a href="day-14/">
             
                     
                     Descomplicando Kubernetes dia 14
@@ -290,9 +290,9 @@
             
         </li>
     
-        <li class="chapter " data-level="2.15" data-path="day-15/README.md">
+        <li class="chapter " data-level="2.15" data-path="day-15/">
             
-                <span>
+                <a href="day-15/">
             
                     
                     Descomplicando Kubernetes dia 15
@@ -753,6 +753,27 @@
 <details>
 <summary>DAY-14</summary>
 
+- [Descomplicando o Kubernetes](day-14/README.md#descomplicando-o-kubernetes)
+  - [DAY-14: Descomplicando Network Policies no Kubernetes](day-14/README.md#day-14-descomplicando-network-policies-no-kubernetes)
+  - [Conteúdo do Day-14](day-14/README.md#conteúdo-do-day-14)
+  - [O que iremos ver hoje?](day-14/README.md#o-que-iremos-ver-hoje)
+    - [O que são Network Policies?](day-14/README.md#o-que-são-network-policies)
+      - [Para que Servem as Network Policies?](day-14/README.md#para-que-servem-as-network-policies)
+      - [Conceitos Fundamentais: Ingress e Egress](day-14/README.md#conceitos-fundamentais-ingress-e-egress)
+      - [Como Funcionam as Network Policies?](day-14/README.md#como-funcionam-as-network-policies)
+      - [Ainda não é padrão](day-14/README.md#ainda-não-é-padrão)
+      - [Criando um Cluster EKS com Network Policies](day-14/README.md#criando-um-cluster-eks-com-network-policies)
+        - [Instalando o EKSCTL](day-14/README.md#instalando-o-eksctl)
+        - [Instalando o AWS CLI](day-14/README.md#instalando-o-aws-cli)
+        - [Criando o Cluster EKS](day-14/README.md#criando-o-cluster-eks)
+        - [Instalando o AWS VPC CNI Plugin](day-14/README.md#instalando-o-aws-vpc-cni-plugin)
+        - [Habilitando o Network Policy nas Configurações Avançadas do CNI](day-14/README.md#habilitando-o-network-policy-nas-configurações-avançadas-do-cni)
+      - [Instalando o Nginx Ingress Controller](day-14/README.md#instalando-o-nginx-ingress-controller)
+    - [Instalando um Nginx Ingress Controller](day-14/README.md#instalando-um-nginx-ingress-controller)
+      - [Nossa Aplicação de Exemplo](day-14/README.md#nossa-aplicação-de-exemplo)
+    - [Criando Regras de Network Policy](day-14/README.md#criando-regras-de-network-policy)
+      - [Ingress](day-14/README.md#ingress)
+      - [Egress](day-14/README.md#egress)
 </details>
 
 <p> </p>
@@ -771,10 +792,10 @@ E por fim, vamos simular algumas conversas para que fique um pouco mais parecido
 <h2 id="a-ideia-do-formato-do-treinamento">A ideia do formato do treinamento</h2>
 <p>Ensinar Kubernetes de uma forma mais real, passando todo o conteúdo de forma prática e trazendo uma conexão com o ambiente real de trabalho.</p>
 <p>Esse é o primeiro treinamento sobre Kubernetes de forma realmente prática, da vida real. Pois entendemos que prática é o conjunto de entendimento sobre um assunto, seguido de exemplos reais que possam ser reproduzidos e conectando tudo isso com a forma como trabalhamos.</p>
-<p>Assim a definição de prática passa a ser um focada em o conhecimento da ferramenta e adicionando a realidade de um profissional no seu dia-a-dia aprendendo uma nova tecnologia, uma nova ferramenta.</p>
+<p>Assim a definição de prática passa a ser focada na integração do conhecimento da ferramenta com a realidade de um profissional no seu dia-a-dia aprendendo uma nova tecnologia, uma nova ferramenta.</p>
 <p>Prepare-se para um novo tipo de treinamento, e o melhor, prepare-se para um novo conceito sobre treinamento prático e de aprendizado de tecnologia.
  </p>
-<p>O conteúdo desse material é dividido em partes chamadas, onde chamamos cada uma de &quot;day&quot; (day_one, day_two, day_three, etc), para facilitar o aprendizado. A ideia é o aluno focar o aprendizado por etapas e por esse motivo recomendamos que ele mude para a próxima parte somente quando estiver totalmente confortável com o conteúdo atual.</p>
+<p>O conteúdo desse material é dividido em partes, onde chamamos cada uma de &quot;day&quot; (day-1, day-2, day-3, etc), para facilitar o aprendizado. A ideia é o aluno focar o aprendizado por etapas e por esse motivo recomendamos que ele mude para a próxima parte somente quando estiver totalmente confortável com o conteúdo atual.</p>
 <p>Nesse material você terá contato com conteúdos que abordam do nível iniciante ao avançado sobre Kubernetes, e agora que ele se tornou aberto, com a ajuda de todos vamos construir o maior e mais completo material sobre Kubernetes do mundo.</p>
 <p>Contamos com sua ajuda para tornar esse material ainda mais completo, colabore! Para contribuir com melhorias no conteúdo, siga as instruções deste <a href="CONTRIBUTING.html">tutorial</a>.</p>
 <p>Veja os vídeos sobre Kubernetes, DevOps, Automação e outros assuntos relacionado a tecnologia nos canais da LINUXtips:</p>
@@ -833,7 +854,7 @@ E por fim, vamos simular algumas conversas para que fique um pouco mais parecido
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Introdução","level":"1.1","depth":1,"next":{"title":"Descomplicando Kubernetes dia 1","level":"2.1","depth":1,"path":"day-1/README.md","ref":"day-1/README.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"pt","gitbook":"*"},"file":{"path":"README.md","mtime":"2024-01-28T10:35:32.340Z","type":"markdown"},"gitbook":{"version":"3.6.20","time":"2024-01-28T10:35:42.806Z"},"basePath":".","book":{"language":"pt"}});
+            gitbook.page.hasChanged({"page":{"title":"Introdução","level":"1.1","depth":1,"next":{"title":"Descomplicando Kubernetes dia 1","level":"2.1","depth":1,"path":"day-1/README.md","ref":"day-1/README.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"pt","gitbook":"*"},"file":{"path":"README.md","mtime":"2024-02-04T15:17:02.928Z","type":"markdown"},"gitbook":{"version":"3.6.20","time":"2024-02-04T15:17:12.091Z"},"basePath":".","book":{"language":"pt"}});
         });
     </script>
 </div>
