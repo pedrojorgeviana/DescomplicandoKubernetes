@@ -875,7 +875,7 @@ No te preocupes por ahora con el parámetro 'apply', todavía hablaremos con má
 Los dispositivos fuera del *cluster*, por defecto, no pueden acceder a los *pods* creados, como es común en otros sistemas de contenedores. Para exponer un *pod*, ejecuta el siguiente comando.
 
 ```bash
-kubectl expose pod nginx
+kubectl expose pod mi-nginx
 ```
 
 Se mostrará el siguiente mensaje de error:
@@ -931,18 +931,18 @@ Como se puede observar, hay dos *services* en nuestro *cluster*: el primero es p
 Para mostrar todos los recursos que se acaban de crear, puedes utilizar una de las siguientes opciones.
 
 ```bash
-kubectl get all
+    kubectl get all
 
-kubectl get pod,service
+    kubectl get pod,service
 
-kubectl get pod,svc
+    kubectl get pod,svc
 ```
 
 Observa que Kubernetes nos proporciona algunas abreviaturas para sus recursos. Con el tiempo, te familiarizarás con ellas. Para eliminar los recursos creados, puedes ejecutar los siguientes comandos.
 
 ```bash
 kubectl delete -f pod-template.yaml
-kubectl delete service nginx
+kubectl delete service mi-nginx
 ```
 
 Luego, vuelve a listar los recursos para verificar si todavía están presentes.
