@@ -1042,7 +1042,7 @@ La salida será algo similar a:</p>
 <p>Otra forma de crear un pod u cualquier otro objeto en Kubernetes es mediante el uso de un archivo manifiesto, que es un archivo en formato YAML en el que se pasan todas las definiciones de su objeto. Más adelante hablaremos mucho más sobre cómo construir archivos manifiestos, pero por ahora quiero que conozcas la opción <code>--dry-run</code> de <code>kubectl</code>, ya que con ella podemos simular la creación de un recurso y aún así tener automáticamente un manifiesto creado.</p>
 <p>Ejemplos:</p>
 <p>Para crear la plantilla de un <em>pod</em>:</p>
-<pre><code class="lang-bash">kubectl run mi-nginx --image nginx --dry-run=client -o yaml &gt; plantilla-pod.yaml
+<pre><code class="lang-bash">kubectl run mi-nginx --image nginx --dry-run=client -o yaml &gt; pod-template.yaml
 </code></pre>
 <p> 
 Aquí también estamos utilizando el parámetro &apos;-o&apos; para modificar la salida al formato YAML.</p>
@@ -1054,7 +1054,7 @@ Aquí también estamos utilizando el parámetro &apos;-o&apos; para modificar la
 <p> </p>
 <h4 id="exponiendo-el-pod-y-creando-un-service">Exponiendo el pod y creando un Service</h4>
 <p>Los dispositivos fuera del <em>cluster</em>, por defecto, no pueden acceder a los <em>pods</em> creados, como es común en otros sistemas de contenedores. Para exponer un <em>pod</em>, ejecuta el siguiente comando.</p>
-<pre><code class="lang-bash">kubectl expose pod nginx
+<pre><code class="lang-bash">kubectl expose pod mi-nginx
 </code></pre>
 <p>Se mostrará el siguiente mensaje de error:</p>
 <pre><code class="lang-bash">error: couldn<span class="hljs-string">&apos;t find port via --port flag or introspection
@@ -1087,15 +1087,15 @@ nginx        ClusterIP   10.105.41.192   &lt;none&gt;        80/TCP    2m30s
  </p>
 <h4 id="limpiando-todo-y-yendo-a-casa">Limpiando todo y yendo a casa</h4>
 <p>Para mostrar todos los recursos que se acaban de crear, puedes utilizar una de las siguientes opciones.</p>
-<pre><code class="lang-bash">kubectl get all
+<pre><code class="lang-bash">    kubectl get all
 
-kubectl get pod,service
+    kubectl get pod,service
 
-kubectl get pod,svc
+    kubectl get pod,svc
 </code></pre>
 <p>Observa que Kubernetes nos proporciona algunas abreviaturas para sus recursos. Con el tiempo, te familiarizarás con ellas. Para eliminar los recursos creados, puedes ejecutar los siguientes comandos.</p>
 <pre><code class="lang-bash">kubectl delete -f pod-template.yaml
-kubectl delete service nginx
+kubectl delete service mi-nginx
 </code></pre>
 <p>Luego, vuelve a listar los recursos para verificar si todavía están presentes.
  </p>
@@ -1142,7 +1142,7 @@ kubectl delete service nginx
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Simplificando Kubernetes día 1","level":"2.1","depth":1,"next":{"title":"Simplificando Kubernetes día 2","level":"2.2","depth":1,"path":"day-2/README.md","ref":"day-2/README.md","articles":[]},"previous":{"title":"Introducción","level":"1.1","depth":1,"path":"README.md","ref":"README.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"es","gitbook":"*"},"file":{"path":"day-1/README.md","mtime":"2024-03-09T13:52:47.877Z","type":"markdown"},"gitbook":{"version":"3.6.20","time":"2024-03-09T13:52:59.965Z"},"basePath":"..","book":{"language":"es"}});
+            gitbook.page.hasChanged({"page":{"title":"Simplificando Kubernetes día 1","level":"2.1","depth":1,"next":{"title":"Simplificando Kubernetes día 2","level":"2.2","depth":1,"path":"day-2/README.md","ref":"day-2/README.md","articles":[]},"previous":{"title":"Introducción","level":"1.1","depth":1,"path":"README.md","ref":"README.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"language":"es","gitbook":"*"},"file":{"path":"day-1/README.md","mtime":"2024-06-29T09:20:55.227Z","type":"markdown"},"gitbook":{"version":"3.6.20","time":"2024-06-29T09:21:11.483Z"},"basePath":"..","book":{"language":"es"}});
         });
     </script>
 </div>
