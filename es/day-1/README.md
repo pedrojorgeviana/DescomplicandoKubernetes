@@ -852,7 +852,7 @@ Ejemplos:
 Para crear la plantilla de un *pod*:
 
 ```bash
-kubectl run mi-nginx --image nginx --dry-run=client -o yaml > plantilla-pod.yaml
+kubectl run mi-nginx --image nginx --dry-run=client -o yaml > pod-template.yaml
 ```
 
 &nbsp;
